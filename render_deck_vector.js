@@ -10,7 +10,7 @@ const ALLOW = ['localhost', '127.0.0.1', 'fonts.googleapis.com', 'fonts.gstatic.
   const [url, outdir] = process.argv.slice(2);
   fs.mkdirSync(outdir, { recursive: true });
 
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROMIUM_PATH || "/usr/bin/chromium", args: ["--no-sandbox"] });
   try {
     const page = await browser.newPage({
       viewport: { width: 1280, height: 720 },

@@ -83,7 +83,7 @@ const countPages = (buf) => (buf.toString('latin1').match(/\/Type\s*\/Page[^s]/g
   const [,, infile, outfile] = process.argv;
   if (!infile || !outfile) { console.error('usage: render_a4_paginated.js <in.html> <out.pdf>'); process.exit(2); }
   const url = 'file://' + path.resolve(infile);
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROMIUM_PATH || "/usr/bin/chromium", args: ["--no-sandbox"] });
   try {
     const page = await browser.newPage();
     await page.emulateMedia({ media: 'print' });

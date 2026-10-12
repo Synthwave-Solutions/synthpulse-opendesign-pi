@@ -26,7 +26,7 @@ const ALLOW = [
     process.exit(2);
   }
 
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROMIUM_PATH || "/usr/bin/chromium", args: ["--no-sandbox"] });
   const result = { mode: 'document', slides: 0 };
   try {
     const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
